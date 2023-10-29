@@ -1,3 +1,5 @@
+import React from "react";
+
 export const MainHeader = () => {
   const handleRemoveAll = () => {
     if (window.confirm("정말 모든 지출 항목을 지우시겠습니까?") === true) {

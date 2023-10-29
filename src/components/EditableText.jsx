@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 export const EditableText = ({ initialText, id }) => {
@@ -17,8 +17,8 @@ export const EditableText = ({ initialText, id }) => {
     setEditId(id);
   };
 
-  const handleChange = (event) => {
-    setText(event.target.value);
+  const handleChange = (e) => {
+    setText(e.target.value);
   };
 
   const handleBlur = () => {

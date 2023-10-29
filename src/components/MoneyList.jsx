@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import { useCallback, useMemo, useEffect } from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 import { getSum } from "./helper/getSum";
 import { EditableText } from "./EditableText";
 import { EditableSpending } from "./EditableSpending";
-// import { useLocalStorage } from "../useLocalStorage";
+import { EditableDate } from "./EditableDate";
 
 export const MoneyList = ({
   spendingItems,
@@ -36,7 +36,7 @@ export const MoneyList = ({
       key={crypto.randomUUID()}
     >
       <div className="flex-1 grow mb-2 items-start">
-        <p className="opacity-40 break-keep w-fit mr-2">({item.time})</p>
+        <EditableDate id={item.id} time={item.time} />
         <li className="flex mt-3 cursor-pointer">
           <EditableText initialText={item.text} id={item.id} />
           <EditableSpending

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { validateInput } from "./helper/validateInput";
 
 export const Form = ({
@@ -29,7 +29,7 @@ export const Form = ({
         id: Date.now(),
         text: inputItem,
         spending: parseInt(inputSpending),
-        time: new Date().toISOString().split("T")[0],
+        time: new Date(),
       });
       nextSpending.sort(function (a, b) {
         return b.id - a.id;
