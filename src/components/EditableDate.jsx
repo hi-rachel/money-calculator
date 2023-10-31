@@ -3,47 +3,39 @@ import Datepicker from "tailwind-datepicker-react";
 import moment from "moment";
 import PropTypes from "prop-types";
 
-const options = {
-  title: "Demo Title",
-  autoHide: true,
-  todayBtn: false,
-  clearBtn: true,
-  clearBtnText: "Clear",
-  maxDate: new Date("2030-01-01"),
-  minDate: new Date("1950-01-01"),
-  theme: {
-    background: "bg-gray-700 dark:bg-gray-800",
-    todayBtn: "",
-    clearBtn: "",
-    icons: "",
-    text: "",
-    disabledText: "bg-red-500",
-    input: "",
-    inputIcon: "",
-    selected: "",
-  },
-  icons: {
-    prev: () => <span>Previous</span>,
-    next: () => <span>Next</span>,
-  },
-  datepickerClassNames: "top-12",
-  defaultDate: new Date(),
-  language: "en",
-  disabledDates: [],
-  weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-  inputNameProp: "date",
-  inputIdProp: "date",
-  inputPlaceholderProp: "Select Date",
-  inputDateFormatProp: {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  },
-};
-
 export const EditableDate = ({ id, time }) => {
-  const itemDate = moment(time, "YYYY-MM-DD").toDate();
+  const itemDate = moment(time).toDate();
+
   const [startDate, setStartDate] = useState(itemDate);
+  const [show, setShow] = useState(false);
+
+  const options = {
+    title: "기록할 날짜",
+    autoHide: true,
+    todayBtn: true,
+    todayBtnText: "오늘",
+    clearBtn: true,
+    clearBtnText: "선택 해제",
+    maxDate: new Date("2050-12-31"),
+    minDate: new Date("1950-01-01"),
+    icons: {
+      prev: () => <span>이전</span>,
+      next: () => <span>다음</span>,
+    },
+    datepickerClassNames: "top-12",
+    defaultDate: startDate,
+    language: "ko",
+    disabledDates: [],
+    weekDays: ["월", "화", "수", "목", "금", "토", "일"],
+    inputNameProp: "date",
+    inputIdProp: "date",
+    inputPlaceholderProp: "Select Date",
+    inputDateFormatProp: {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    },
+  };
 
   const origin = JSON.parse(localStorage.getItem("spending"));
 
@@ -56,13 +48,16 @@ export const EditableDate = ({ id, time }) => {
     setStartDate(date);
   };
 
+  const handleClose = (state) => {
+    setShow(state);
+  };
+
   return (
     <div>
       <Datepicker
-        showIcon
-        selected={startDate}
         onChange={handleChangeDate}
-        show={true}
+        show={show}
+        setShow={handleClose}
         options={options}
       ></Datepicker>
     </div>
