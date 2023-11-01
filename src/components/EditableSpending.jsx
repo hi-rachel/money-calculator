@@ -12,13 +12,18 @@ export const EditableSpending = ({ initialSpending, id, plusMinus }) => {
   });
   localStorage.setItem("spending", JSON.stringify(updateOrigin));
 
+  const thousandSeparator =
+    isNaN(spending) | (spending == null)
+      ? spending
+      : spending.toLocaleString("ko-KR");
+
   const handleDoubleClick = (id) => {
     setIsEditing(true);
     setEditId(id);
   };
 
   const handleChange = (event) => {
-    isNaN(event.target.value)
+    isNaN(event.target.value) | (event.target.value == null)
       ? setSpending(0)
       : setSpending(parseInt(event.target.value));
   };
@@ -43,7 +48,7 @@ export const EditableSpending = ({ initialSpending, id, plusMinus }) => {
             className="w-full"
             autoFocus
             type="number"
-            value={spending}
+            value={spending || ""}
             onKeyDown={handleKeyDown}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -52,7 +57,7 @@ export const EditableSpending = ({ initialSpending, id, plusMinus }) => {
         ) : (
           <>
             <span>{plusMinus ? "+" : "-"}</span>
-            <span className="w-fit">{spending.toLocaleString()} 원</span>
+            <span className="w-fit">{thousandSeparator} 원</span>
           </>
         )}
       </div>
