@@ -55,6 +55,7 @@ export const EditableDate = ({ id, time }) => {
   return (
     <div>
       <Datepicker
+        classNames="flex w-1/2 text-xs min-w-min"
         onChange={handleChangeDate}
         show={show}
         setShow={handleClose}

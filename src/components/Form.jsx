@@ -29,7 +29,7 @@ export const Form = ({
         id: Date.now(),
         text: inputItem,
         spending: parseInt(inputSpending),
-        time: new Date(),
+        time: new Date().toISOString(),
       });
       nextSpending.sort(function (a, b) {
         return b.id - a.id;
@@ -68,7 +68,7 @@ export const Form = ({
   return (
     <>
       <div
-        className="flex flex-wrap justify-center align-middle mt-4 mb-6"
+        className="flex flex-nowrap justify-center align-middle mt-4 mb-6 mx-4"
         onKeyDown={handleKeyDown}
       >
         <div>
@@ -89,30 +89,34 @@ export const Form = ({
             −
           </button>
         </div>
-        <div className="my-auto">
-          <input
-            type="text"
-            value={inputItem}
-            onChange={handleChangeItem}
-            className="px-4 py-3 rounded-full"
-            placeholder="지출 항목"
-            ref={inputEl}
-            required
-          />
-          <input
-            type="number"
-            value={inputSpending}
-            onChange={handleChangeSpending}
-            className="px-4 py-3 rounded-full"
-            placeholder="지출 금액"
-            required
-          />
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={handleClick}
-          >
-            추가
-          </button>
+        <div className="my-auto flex-nowrap flex content-center">
+          <div className="flex-wrap">
+            <input
+              type="text"
+              value={inputItem}
+              onChange={handleChangeItem}
+              className="px-4 py-3 rounded-full"
+              placeholder="지출 항목"
+              ref={inputEl}
+              required
+            />
+            <input
+              type="number"
+              value={inputSpending}
+              onChange={handleChangeSpending}
+              className="px-4 py-3 rounded-full"
+              placeholder="지출 금액"
+              required
+            />
+          </div>
+          <div className="flex items-center">
+            <button
+              className="h-12 break-keep bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleClick}
+            >
+              추가
+            </button>
+          </div>
         </div>
       </div>
     </>
